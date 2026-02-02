@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KYC Verification</title>
+</head>
+<body>
+
+<h2>KYC Verification</h2>
+
+<input id="fullname" placeholder="Full Name"><br><br>
+<input id="dob" type="date"><br><br>
+<input id="pan" placeholder="PAN Number"><br><br>
+<input id="aadhaar" placeholder="Aadhaar Number"><br><br>
+
+<button onclick="submitKyc()">Submit KYC</button>
+<p id="status"></p>
+
+<script src="/js/auth.js"></script>
+
+<script>
+async function submitKyc() {
+    const token = getToken();
+
+    if (!token) {
+        document.getElementById("status").innerText = "❌ Please login first";
+        return;
+    }
+
+    const res = await fetch("/kyc/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            fullName: document.getElementById("fullname").value,
+            dob: document.getElementById("dob").value,
+            panNumber: document.getElementById("pan").value,
+            aadhaarNumber: document.getElementById("aadhaar").value
+        })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        document.getElementById("status").innerText = "❌ " + data.error;
+        return;
+    }
+
+    document.getElementById("status").innerText =
+        "✅ KYC Submitted (Pending Approval)";
+
+    // 🔥 Redirect after submit
+    setTimeout(() => {
+        window.location.href = "/dashboard.html";
+    }, 1500);
+}
+</script>
+
+</body>
+</html>
