@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const { MONGO_URI } = require("./config");
 const authMiddleware = require("./middleware/authMiddleware");
 const kycRoutes = require("./routes/kyc");
 
@@ -50,12 +49,15 @@ app.get("/protected", authMiddleware, (req, res) => {
    DATABASE CONNECTION
 ========================= */
 mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("✅ DB connected"))
-  .catch((err) => console.error("❌ DB connection error:", err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed:", err.message);
+    process.exit(1);
+  });
 
 /* =========================
-   SERVER START (IMPORTANT)
+   SERVER START
 ========================= */
 const PORT = process.env.PORT || 5000;
 
