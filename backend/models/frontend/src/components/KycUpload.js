@@ -7,19 +7,19 @@ export default function KycUpload(){
     const [selfieUrl,setSelfie]=useState("");
 
     const scanPAN=async()=>{
-        const res=await axios.post("http://localhost:5000/kyc/pan");
+        const res=await axios.post("https://finvault-77kp.onrender.com");
         setPandata(res.data.panData);
     };
     const fetchdigi=async()=>{
-        const res=await axios.get("http://localhost:5000/kyc/digilocker");
+        const res=await axios.get("https://finvault-77kp.onrender.com");
         setdigi(res.data);
     };
     const uploadSelfie=async()=>{
-        const res=await axios.post("http://localhost:5000/kyc/selfie");
+        const res=await axios.post("https://finvault-77kp.onrender.com");
         setSelfie(res.data.url);
     };
     const SubmitKyc=async()=>{
-        await axios.post("http://localhost:5000/kyc/submit",{
+        await axios.post("https://finvault-77kp.onrender.com",{
             userId,
             panData,
             digilockerData,

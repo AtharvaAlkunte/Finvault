@@ -3,7 +3,7 @@ import axios from "axios";
 export default function Register(){
     const[form,setForm]=useState({name:"",email:"",password:""});
     const submit=async()=>{
-        await axios.post("http://localhost:5000/auth/register",form);
+        await axios.post("https://finvault-77kp.onrender.com",form);
         alert("Registered");
     };
     return (

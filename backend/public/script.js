@@ -1,6 +1,6 @@
 
-const API_BASE="http://localhost:5000/kyc";
-fetch("http://localhost:5000/kyc/submit", {
+const API_BASE="https://finvault-77kp.onrender.com";
+fetch("https://finvault-77kp.onrender.com", {
 method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -64,7 +64,7 @@ async function submitKYC() {
     };
 
     try {
-        const res = await fetch("http://localhost:5000/kyc/submit", {
+        const res = await fetch("https://finvault-77kp.onrender.com", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)

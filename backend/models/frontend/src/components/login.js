@@ -3,7 +3,7 @@ import axios from "axios";
 export default function Login(){
     const[form,setForm]=useState({email:"",password:""});
     const login=async()=>{
-        const res=await axios.post("http://localhost:5000/auth/login",form);
+        const res=await axios.post("https://finvault-77kp.onrender.com",form);
         localStorage.setItem("token",res.data.token);
         alert("Login successful");
     };
