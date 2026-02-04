@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+</head>
+<body>
+    <h2>Pending KYC Requests</h2>
+    <ul id="list"></ul>
+    <script>
+        const token=localStorage.getItem("token");
+        async function loadKyc(){
+            const res=await fetch("/admin/kyc/pending",{
+                headers:{
+                    Authorization:"Bearer " +token
+                }
+            });
+            const users=await res.json();
+            const list=document.getElementById("list");
+            list.innerHTML="";
+            
+            users.forEach(u=>{
+                const li=document.createElement("li");
+                li.innerHTML=`
+            ${u.email}
+            <button onclick="update('${u._id}','Approved')">Approve</button>
+            <button onclick="update('${u._id}','Rejected')">Reject</button>
+            `;
+            list.appendChild(li);
+            });
+        }
+        async function update(id,status){
+            await fetch("/admin/kyc/"+id,{
+             method:"POST",
+             headers:{
+                "Content-Type":"application/json",
+                Authorization:"Bearer " +token
+             }, 
+              body: JSON.stringify({ status })  
+            });
+            loadKyc();
+        }
+        loadKyc();
+    </script>
+</body>
+</html>
