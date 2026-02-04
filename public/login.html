@@ -1,0 +1,42 @@
+<button onclick="login()">Login</button>
+<p id="authStatus"></p>
+
+<script src="/js/auth.js"></script>
+
+<script>
+async function login() {
+    const res = await fetch("/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value
+        })
+    });
+
+    const data = await res.json();
+    console.log("LOGIN RESPONSE:", data);
+
+    if (!res.ok) {
+        document.getElementById("authStatus").innerText = data.error;
+        return;
+    }
+
+    saveToken(data.token);
+
+    // 🔥 Fetch user profile to check KYC
+    const profileRes = await fetch("/user/profile", {
+        headers: {
+            Authorization: "Bearer " + data.token
+        }
+    });
+
+    const profile = await profileRes.json();
+
+    if (profile.kycStatus === "Not Submitted") {
+        window.location.href = "/kyc.html";
+    } else {
+        window.location.href = "/dashboard.html";
+    }
+}
+</script>

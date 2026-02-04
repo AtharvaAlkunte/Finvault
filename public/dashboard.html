@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+
+<h2>User Dashboard</h2>
+
+<p><b>Name:</b> <span id="name"></span></p>
+<p><b>Email:</b> <span id="email"></span></p>
+<p><b>KYC status:</b> <span id="kyc"></span></p>
+
+<div id="message"></div>
+<button onclick="logout()">Logout</button>
+
+<script src="/js/auth.js"></script>
+
+<script>
+async function loadDashboard() {
+    const token = getToken();
+
+    if (!token) {
+        window.location.href = "/login.html";
+        return;
+    }
+
+    const res = await fetch("/user/dashboard", {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        document.body.innerHTML = "<h3>Unauthorized</h3>";
+        return;
+    }
+
+    document.getElementById("name").innerText = data.name;
+    document.getElementById("email").innerText = data.email;
+    document.getElementById("kyc").innerText = data.kycStatus;
+
+    const msg = document.getElementById("message");
+
+    if (data.kycStatus === "Approved") {
+        msg.innerHTML = "✅ Access granted";
+    } else if (data.kycStatus === "Pending") {
+        msg.innerHTML = "⏳ KYC under review";
+    } else if (data.kycStatus === "Rejected") {
+        msg.innerHTML = "❌ KYC rejected. Please resubmit";
+    } else {
+        // 🔥 Redirect if KYC not submitted
+        window.location.href = "/kyc.html";
+    }
+}
+
+loadDashboard();
+</script>
+
+</body>
+</html>
