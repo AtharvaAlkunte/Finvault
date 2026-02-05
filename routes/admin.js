@@ -1,39 +1,31 @@
+console.log("✅ admin.js routes file loaded");
 const express = require("express");
 const router = express.Router();
-const Kyc = require("../models/Kyc");
 const authMiddleware = require("../middleware/authMiddleware");
-const isAdmin = require("../middleware/isAdmin");
+const isAdmin = require("../middleware/isadmin");
+const Kyc = require("../models/Kyc");
 
-/* =========================
-   GET ALL PENDING KYC
-========================= */
-router.get("/kyc/pending", authMiddleware, isAdmin, async (req, res) => {
-  try {
-    const kycs = await Kyc.find({ status: "PENDING" });
-    res.json(kycs);
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
+router.put(
+  "/kyc/approve/:id",
+  authMiddleware,
+  isAdmin,
+  async (req, res) => {
+    try {
+      const kyc = await Kyc.findById(req.params.id);
 
-/* =========================
-   APPROVE KYC
-========================= */
-router.put("/kyc/:id/approve", authMiddleware, isAdmin, async (req, res) => {
-  try {
-    const kyc = await Kyc.findById(req.params.id);
+      if (!kyc) {
+        return res.status(404).json({ message: "KYC not found" });
+      }
 
-    if (!kyc) {
-      return res.status(404).json({ message: "KYC not found" });
+      kyc.status = "APPROVED";
+      await kyc.save();
+
+      res.json({ message: "KYC approved successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
     }
-
-    kyc.status = "APPROVED";
-    await kyc.save();
-
-    res.json({ message: "KYC approved successfully" });
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
   }
-});
+);
 
 module.exports = router;

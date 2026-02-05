@@ -14,7 +14,8 @@ const authMiddleware = (req, res, next) => {
 
         req.userId = decoded.userId;
         req.userRole = decoded.role;
-        req.isAdmin = decoded.role === "admin";
+        req.isAdmin = decoded.role.toUpperCase() === "ADMIN";
+;
 
 
         console.log("ROLE FROM TOKEN:", req.userRole);
