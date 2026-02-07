@@ -58,7 +58,7 @@
       justify-content: space-between;
       align-items: center;
       backdrop-filter: blur(10px);
-      background: rgba(10, 14, 26, 0.8);
+      background: rgba(10, 14, 26, 0.95);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 1000;
     }
@@ -69,6 +69,7 @@
       background: linear-gradient(135deg, #00c6ff, #7877c6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
       letter-spacing: -1px;
     }
 
@@ -90,6 +91,23 @@
       color: #00c6ff;
     }
 
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu-btn:hover {
+      border-color: #00c6ff;
+      background: rgba(0, 198, 255, 0.1);
+    }
+
     .cta-btn {
       padding: 12px 28px;
       background: linear-gradient(135deg, #00c6ff, #0072ff);
@@ -100,6 +118,7 @@
       cursor: pointer;
       transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+      white-space: nowrap;
     }
 
     .cta-btn:hover {
@@ -113,12 +132,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 100px 60px 60px;
+      padding: 120px 60px 60px;
       position: relative;
     }
 
     .hero-content {
       max-width: 1200px;
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
@@ -133,6 +153,7 @@
       background: linear-gradient(135deg, #fff, #00c6ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-text p {
@@ -145,6 +166,7 @@
     .hero-buttons {
       display: flex;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .primary-btn {
@@ -214,6 +236,7 @@
       background: linear-gradient(135deg, #00c6ff, #7877c6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .metric-label {
@@ -299,6 +322,40 @@
       align-items: center;
     }
 
+    .kyc-info h2 {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    .kyc-info p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 30px;
+    }
+
+    .kyc-steps {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .kyc-step {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .kyc-step-number {
+      font-size: 32px;
+      font-weight: 800;
+      color: #00c6ff;
+    }
+
+    .kyc-step-label {
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 10px;
+    }
+
     .kyc-form {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 24px;
@@ -351,6 +408,12 @@
       display: block;
     }
 
+    .form-divider {
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
     /* Stats Section */
     .stats {
       padding: 80px 60px;
@@ -375,6 +438,7 @@
       background: linear-gradient(135deg, #00c6ff, #7877c6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .stat-label {
@@ -389,24 +453,259 @@
       text-align: center;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
     }
 
-    @media (max-width: 968px) {
-      .hero-content, .kyc-container {
+    /* ============================================
+       MOBILE RESPONSIVE STYLES
+       ============================================ */
+
+    /* Tablet and below */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 15px 40px;
+      }
+
+      .hero {
+        padding: 100px 40px 60px;
+      }
+
+      .hero-content {
+        gap: 60px;
+      }
+
+      .features, .kyc-section, .stats {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(10, 14, 26, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 80px 30px 30px;
+        gap: 25px;
+        transition: right 0.3s ease;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        align-items: flex-start;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 18px;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .nav-links .cta-btn {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .hero-text h1 {
+        font-size: 36px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .hero-buttons button {
+        width: 100%;
+      }
+
+      .card-3d {
+        padding: 30px 25px;
+      }
+
+      .metric {
+        margin: 25px 0;
+      }
+
+      .metric-value {
+        font-size: 36px;
+      }
+
+      .metric-label {
+        font-size: 13px;
+      }
+
+      /* Features */
+      .features {
+        padding: 80px 20px;
+      }
+
+      .section-header {
+        margin-bottom: 50px;
+      }
+
+      .section-header h2 {
+        font-size: 32px;
+      }
+
+      .section-header p {
+        font-size: 16px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .feature-card {
+        padding: 30px 25px;
+      }
+
+      .feature-icon {
+        font-size: 40px;
+        margin-bottom: 20px;
+      }
+
+      .feature-card h3 {
+        font-size: 22px;
+      }
+
+      /* KYC Section */
+      .kyc-section {
+        padding: 80px 20px;
+      }
+
+      .kyc-container {
         grid-template-columns: 1fr;
         gap: 40px;
       }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
+
+      .kyc-info h2 {
+        font-size: 32px;
       }
-      
+
+      .kyc-info p {
+        font-size: 16px;
+      }
+
+      .kyc-steps {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .kyc-step {
+        min-width: auto;
+      }
+
+      .kyc-step-number {
+        font-size: 28px;
+      }
+
+      .kyc-form {
+        padding: 30px 25px;
+      }
+
+      .kyc-form h3 {
+        font-size: 24px;
+        margin-bottom: 25px;
+      }
+
+      .form-group input {
+        padding: 14px 18px;
+        font-size: 15px;
+      }
+
+      .primary-btn, .secondary-btn {
+        padding: 14px 30px;
+        font-size: 15px;
+      }
+
+      /* Stats */
+      .stats {
+        padding: 60px 20px;
+      }
+
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
       }
-      
+
+      .stat-item {
+        padding: 20px;
+      }
+
+      .stat-number {
+        font-size: 40px;
+      }
+
+      .stat-label {
+        font-size: 14px;
+      }
+
+      /* Footer */
+      footer {
+        padding: 30px 20px;
+        font-size: 13px;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 480px) {
       .hero-text h1 {
-        font-size: 42px;
+        font-size: 28px;
+      }
+
+      .section-header h2 {
+        font-size: 28px;
+      }
+
+      .kyc-info h2 {
+        font-size: 28px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stat-number {
+        font-size: 36px;
       }
     }
   </style>
@@ -416,11 +715,12 @@
 
   <nav>
     <div class="logo">FinVault</div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#security">Security</a>
-      <a href="#kyc">Quick KYC</a>
-      <a href="#about">About</a>
+    <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#features" onclick="closeMenu()">Features</a>
+      <a href="#security" onclick="closeMenu()">Security</a>
+      <a href="#kyc" onclick="closeMenu()">Quick KYC</a>
+      <a href="#about" onclick="closeMenu()">About</a>
       <button class="cta-btn" onclick="scrollToKYC()">Get Started</button>
     </div>
   </nav>
@@ -495,21 +795,21 @@
 
   <section class="kyc-section" id="kyc">
     <div class="kyc-container">
-      <div>
-        <h2 style="font-size: 48px; margin-bottom: 24px;">Complete Your KYC in Minutes</h2>
-        <p style="font-size: 18px; color: rgba(255, 255, 255, 0.7); margin-bottom: 30px;">Join millions of verified users. Our streamlined process integrates with PAN, DigiLocker, and includes secure facial verification.</p>
-        <div style="display: flex; gap: 20px; margin-top: 30px;">
-          <div style="flex: 1;">
-            <div style="font-size: 32px; font-weight: 800; color: #00c6ff;">Step 1</div>
-            <p style="color: rgba(255, 255, 255, 0.6); margin-top: 10px;">Register Account</p>
+      <div class="kyc-info">
+        <h2>Complete Your KYC in Minutes</h2>
+        <p>Join millions of verified users. Our streamlined process integrates with PAN, DigiLocker, and includes secure facial verification.</p>
+        <div class="kyc-steps">
+          <div class="kyc-step">
+            <div class="kyc-step-number">Step 1</div>
+            <p class="kyc-step-label">Register Account</p>
           </div>
-          <div style="flex: 1;">
-            <div style="font-size: 32px; font-weight: 800; color: #00c6ff;">Step 2</div>
-            <p style="color: rgba(255, 255, 255, 0.6); margin-top: 10px;">Submit Documents</p>
+          <div class="kyc-step">
+            <div class="kyc-step-number">Step 2</div>
+            <p class="kyc-step-label">Submit Documents</p>
           </div>
-          <div style="flex: 1;">
-            <div style="font-size: 32px; font-weight: 800; color: #00c6ff;">Step 3</div>
-            <p style="color: rgba(255, 255, 255, 0.6); margin-top: 10px;">Get Verified</p>
+          <div class="kyc-step">
+            <div class="kyc-step-number">Step 3</div>
+            <p class="kyc-step-label">Get Verified</p>
           </div>
         </div>
       </div>
@@ -528,7 +828,7 @@
         <button class="secondary-btn" style="width: 100%; margin-top: 15px;" onclick="login()">Login to Existing Account</button>
         <div id="authStatus" class="status-message"></div>
         
-        <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="form-divider">
           <h3 style="margin-bottom: 20px;">📄 Quick KYC Submission</h3>
           <button class="primary-btn" style="width: 100%;" onclick="submitKYC()">Submit KYC Documents</button>
           <div id="kycStatus" class="status-message"></div>
@@ -570,8 +870,19 @@
   <script>
     let token = "";
 
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.remove('active');
+    }
+
     function scrollToKYC() {
       document.getElementById('kyc').scrollIntoView({ behavior: 'smooth' });
+      closeMenu();
     }
 
     function showStatus(elementId, message, isError = false) {
@@ -588,96 +899,95 @@
         el.style.color = '#00c6ff';
       }
     }
+
+    function getToken() {
+      return localStorage.getItem("token") || token;
+    }
+
     async function register() {
-  const nameVal = document.getElementById("name").value.trim();
-  const emailVal = document.getElementById("email").value.trim();
-  const passwordVal = document.getElementById("password").value.trim();
+      const nameVal = document.getElementById("name").value.trim();
+      const emailVal = document.getElementById("email").value.trim();
+      const passwordVal = document.getElementById("password").value.trim();
 
-  if (!nameVal || !emailVal || !passwordVal) {
-    showStatus("authStatus", "Please fill all fields", true);
-    return;
-  }
+      if (!nameVal || !emailVal || !passwordVal) {
+        showStatus("authStatus", "Please fill all fields", true);
+        return;
+      }
 
-  try {
-    const res = await fetch("/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: nameVal,
-        email: emailVal,
-        password: passwordVal
-      })
-    });
+      try {
+        const res = await fetch("/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: nameVal,
+            email: emailVal,
+            password: passwordVal
+          })
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (!res.ok) {
-      showStatus("authStatus", data.error || "Registration failed", true);
-      return;
+        if (!res.ok) {
+          showStatus("authStatus", data.error || "Registration failed", true);
+          return;
+        }
+
+        localStorage.setItem("token", data.token);
+        token = data.token;
+
+        console.log("JWT SAVED:", localStorage.getItem("token"));
+        showStatus("authStatus", "✓ Registration successful!");
+
+      } catch (error) {
+        console.error(error);
+        showStatus("authStatus", "Server error. Try again.", true);
+      }
     }
 
-    /* ✅ SAVE TOKEN (THIS WAS MISSING EARLIER) */
-    localStorage.setItem("token", data.token);
+    async function login() {
+      const emailVal = document.getElementById("email").value.trim();
+      const passwordVal = document.getElementById("password").value.trim();
 
-    /* Optional: also keep in memory */
-    token = data.token;
+      if (!emailVal || !passwordVal) {
+        showStatus("authStatus", "Please enter email and password", true);
+        return;
+      }
 
-    console.log("JWT SAVED:", localStorage.getItem("token"));
+      try {
+        const res = await fetch("/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: emailVal,
+            password: passwordVal
+          })
+        });
 
-    showStatus("authStatus", "✓ Registration successful!");
+        const data = await res.json();
 
-  } catch (error) {
-    console.error(error);
-    showStatus("authStatus", "Server error. Try again.", true);
-  }
-}
+        if (!res.ok) {
+          showStatus("authStatus", data.error || "Login failed", true);
+          return;
+        }
 
-     async function login() {
-  const emailVal = document.getElementById("email").value.trim();
-  const passwordVal = document.getElementById("password").value.trim();
+        localStorage.setItem("token", data.token);
+        token = data.token;
 
-  if (!emailVal || !passwordVal) {
-    showStatus("authStatus", "Please enter email and password", true);
-    return;
-  }
+        console.log("JWT STORED:", data.token);
+        showStatus("authStatus", "✓ Login successful!");
 
-  try {
-    const res = await fetch("/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: emailVal,
-        password: passwordVal
-      })
-    });
+        setTimeout(() => {
+          window.location.href = "/dashboard.html";
+        }, 1000);
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      showStatus("authStatus", data.error || "Login failed", true);
-      return;
+      } catch (err) {
+        console.error(err);
+        showStatus("authStatus", "Server error. Try again later.", true);
+      }
     }
 
-    /* ✅ SAVE JWT TOKEN */
-    localStorage.setItem("token", data.token);
-    token = data.token;
-
-    console.log("JWT STORED:", data.token);
-
-    showStatus("authStatus", "✓ Login successful!");
-
-    /* Optional redirect */
-    setTimeout(() => {
-      window.location.href = "/dashboard.html";
-    }, 1000);
-
-  } catch (err) {
-    console.error(err);
-    showStatus("authStatus", "Server error. Try again later.", true);
-  }
-}
     async function submitKYC() {
-      const token=getToken();
+      const token = getToken();
       if (!token) {
         showStatus('kycStatus', 'Please login first', true);
         return;
@@ -704,6 +1014,7 @@
     }
 
     async function loadDashboard() {
+      const token = getToken();
       if (!token) {
         showStatus('dashboardStatus', 'Please login first', true);
         return;
@@ -719,6 +1030,16 @@
         showStatus('dashboardStatus', 'Failed to load dashboard.', true);
       }
     }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('navLinks');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      
+      if (!navLinks.contains(event.target) && !menuBtn.contains(event.target)) {
+        navLinks.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>
